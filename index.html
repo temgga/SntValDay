@@ -91,12 +91,45 @@ button:active {
 
 .section.active { display: flex; }
 
+/* Специальный стиль для секции с титрами с фоновым фото */
+#creditsSection {
+  position: relative;
+  background-image: url('lph.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Эффект параллакса */
+}
+
+/* Затемняющий слой поверх фонового фото */
+#creditsSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный слой */
+  z-index: 1;
+}
+
+/* Контент поверх затемнения */
+#creditsSection > * {
+  position: relative;
+  z-index: 2;
+}
+
+#creditsSection h1 {
+  color: white;
+  text-shadow: 0 0 20px #e63946, 2px 2px 4px rgba(0,0,0,0.5);
+}
+
 @keyframes fadeIn { 
   0% {opacity:0; transform: translateY(20px);} 
   100% {opacity:1; transform: translateY(0);} 
 }
 
-/* Медиа контейнеры - ИСПРАВЛЕНО ДЛЯ ФОТО */
+/* Медиа контейнеры */
 .media { 
   display: flex; 
   flex-wrap: wrap; 
@@ -109,21 +142,21 @@ button:active {
 
 .media.photos .photo-wrapper {
   flex: 0 1 calc(50% - 20px);
-  max-width: 280px; /* Увеличил максимальную ширину */
+  max-width: 280px;
   width: 100%;
-  aspect-ratio: auto; /* Убрал фиксированное соотношение сторон */
+  aspect-ratio: auto;
   margin-bottom: 10px;
 }
 
 @media (min-width: 768px) {
   .media.photos .photo-wrapper {
-    flex: 0 1 calc(33.33% - 20px); /* На планшетах по 3 в ряд */
+    flex: 0 1 calc(33.33% - 20px);
   }
 }
 
 @media (min-width: 1024px) {
   .media.photos .photo-wrapper {
-    flex: 0 1 calc(20% - 20px); /* На десктопе по 5 в ряд */
+    flex: 0 1 calc(20% - 20px);
     max-width: 220px;
   }
 }
@@ -134,30 +167,22 @@ button:active {
   box-shadow: 0 15px 30px rgba(0,0,0,0.25);
   transition: transform 0.3s, box-shadow 0.3s;
   background: white;
-  padding: 8px; /* Добавил рамку вокруг фото */
+  padding: 8px;
   border: 3px solid rgba(255,255,255,0.8);
 }
 
 .photo-wrapper img {
   width: 100%;
-  height: auto; /* Автоматическая высота */
-  object-fit: contain; /* Вместо cover - показывает всё фото */
+  height: auto;
+  object-fit: contain;
   display: block;
   border-radius: 20px;
-  background: #f0f0f0; /* Фон на случай прозрачных фото */
+  background: #f0f0f0;
 }
 
 .photo-wrapper:hover { 
   transform: scale(1.05);
   box-shadow: 0 20px 40px rgba(230, 57, 70, 0.4);
-}
-
-/* Подписи к фото (можно добавить при желании) */
-.photo-caption {
-  margin-top: 5px;
-  font-size: 0.9rem;
-  color: #e63946;
-  font-weight: 600;
 }
 
 .media.videos {
@@ -167,7 +192,7 @@ button:active {
 
 .media.videos video {
   width: 100%;
-  max-width: 320px; /* Увеличил видео */
+  max-width: 320px;
   height: auto;
   border-radius: 25px;
   box-shadow: 0 15px 30px rgba(0,0,0,0.3);
@@ -175,7 +200,7 @@ button:active {
 }
 
 .heart-btn {
-  font-size: min(120px, 35vw); /* Увеличил сердечко */
+  font-size: min(120px, 35vw);
   color: #e63946;
   cursor: pointer;
   user-select: none;
@@ -307,19 +332,20 @@ button:active {
   100%{transform:translateY(-20vh) scale(1);opacity:0;}
 }
 
-/* КРАСИВОЕ РАСПОЛОЖЕНИЕ ТЕКСТА */
+/* КРАСИВОЕ РАСПОЛОЖЕНИЕ ТЕКСТА НА ФОНЕ ФОТО */
 .beautiful-text {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
   padding: 35px 30px;
   border-radius: 60px 60px 60px 60px;
   max-width: 95%;
   width: 900px;
   margin: 20px auto;
-  box-shadow: 0 30px 60px rgba(230, 57, 70, 0.5);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
   border: 3px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
+  border: 3px solid rgba(255, 215, 0, 0.3);
 }
 
 .beautiful-text::before {
@@ -332,7 +358,7 @@ button:active {
   background: linear-gradient(
     45deg,
     transparent 30%,
-    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.15) 50%,
     transparent 70%
   );
   animation: shine 8s infinite;
@@ -349,7 +375,7 @@ button:active {
   font-size: clamp(1.2rem, 5vw, 1.8rem);
   line-height: 1.9;
   margin: 20px 0;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
   position: relative;
   z-index: 2;
   max-width: 100%;
@@ -425,7 +451,7 @@ button:active {
 /* Любовное фото */
 .love-photo {
   width: 100%;
-  max-width: 450px; /* Увеличил */
+  max-width: 450px;
   height: auto;
   max-height: 70vh;
   border-radius: 50px;
@@ -459,7 +485,6 @@ button:active {
   <h1>Так начиналась наша история 💖</h1>
   <p>И это далеко не конец, обещаю тебе дальше будет теплее, интереснее и нежнее…</p>
   
-  <!-- Фотографии - ТЕПЕРЬ ПОЛНОСТЬЮ ВИДНЫ -->
   <div class="media photos">
     <div class="photo-wrapper">
       <img src="photo1.jpg" alt="Фото 1">
@@ -478,7 +503,6 @@ button:active {
     </div>
   </div>
 
-  <!-- Видео снизу -->
   <div class="media videos">
     <video src="video1.mp4" controls></video>
     <video src="video2.mp4" controls></video>
@@ -533,7 +557,6 @@ button:active {
     <p>📦 Трек-номер: <strong><span id="trackNumber">1234567890</span></strong></p>
     <p>🔗 <a id="trackLink" href="https://www.cdek.ru/track?order_id=1234567890" target="_blank">Отследить на сайте СДЭК</a></p>
     
-    <!-- Важное сообщение о паспорте -->
     <div class="passport-message">
       ⚡️ Пусть Полина не забудет паспорт! ⚡️
     </div>
@@ -541,13 +564,12 @@ button:active {
     <p style="font-size:1.3rem; margin-top:25px;">С любовью и нежностью — твой Тёма 💖</p>
   </div>
   
-  <!-- Кнопка финальных титров (появляется после нажатия на сердечко) -->
   <div id="creditsButton">
     <button onclick="nextSection('creditsSection')">🎬 Финальные титры 🎬</button>
   </div>
 </div>
 
-<!-- Секция 4: Красивый текст -->
+<!-- Секция 4: Красивый текст НА ФОНЕ ФОТОГРАФИИ -->
 <div class="section" id="creditsSection">
   <h1 style="color:#fff; text-shadow: 0 0 15px #e63946;">❤️ Самое важное ❤️</h1>
   
@@ -582,7 +604,7 @@ button:active {
 
 <script>
 // Данные для доставки
-const myTrack = "10224601913";
+const myTrack = "СДЭК-1234567890";
 const myAddress = "г. Санкт-Петербург, Московский просп., 161, помещение 7H";
 
 document.getElementById('trackNumber').innerText = myTrack;
@@ -615,10 +637,7 @@ if(heartBtn) {
       createSparks(heartBtn);
       createConfetti(heartBtn);
       
-      // Показываем информацию о подарке
       gift.style.display = 'block';
-      
-      // ПОКАЗЫВАЕМ КНОПКУ ФИНАЛЬНЫХ ТИТРОВ
       creditsButton.style.display = 'flex';
       
       createHearts();
@@ -668,7 +687,6 @@ function createFlyingElement(text, rect, className, x, y, color = '#e63946') {
   setTimeout(()=>element.remove(),1500);
 }
 
-// Добавляем ключевые кадры для полета
 const style = document.createElement('style');
 style.textContent = `
 @keyframes fly {
@@ -677,7 +695,6 @@ style.textContent = `
 }`;
 document.head.appendChild(style);
 
-// Создание плавающих сердечек
 function createHearts(){
   for(let i=0;i<8;i++){
     setTimeout(() => {
@@ -694,10 +711,8 @@ function createHearts(){
   }
 }
 
-// Запускаем сердечки каждые 3 секунды
 setInterval(createHearts, 3000);
 
-// Сердечки из фото Love Is
 const lovePhoto = document.getElementById('lovePhoto');
 if(lovePhoto) {
   setInterval(() => {
@@ -710,12 +725,10 @@ if(lovePhoto) {
   }, 800);
 }
 
-// Предзагрузка
 window.addEventListener('load', () => {
   setTimeout(createHearts, 500);
 });
 
-// Адаптация для мобильных
 document.addEventListener('touchstart', function() {}, {passive: true});
 
 </script>
