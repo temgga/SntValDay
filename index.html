@@ -96,60 +96,86 @@ button:active {
   100% {opacity:1; transform: translateY(0);} 
 }
 
-/* Медиа контейнеры */
+/* Медиа контейнеры - ИСПРАВЛЕНО ДЛЯ ФОТО */
 .media { 
   display: flex; 
   flex-wrap: wrap; 
   justify-content: center; 
-  gap: 12px; 
+  gap: 20px; 
   margin: 20px 0;
   width: 100%;
   max-width: 1200px;
 }
 
 .media.photos .photo-wrapper {
-  flex: 0 1 calc(50% - 12px);
-  max-width: 180px;
-  aspect-ratio: 1/1;
+  flex: 0 1 calc(50% - 20px);
+  max-width: 280px; /* Увеличил максимальную ширину */
+  width: 100%;
+  aspect-ratio: auto; /* Убрал фиксированное соотношение сторон */
+  margin-bottom: 10px;
 }
 
 @media (min-width: 768px) {
   .media.photos .photo-wrapper {
-    flex: 0 1 calc(20% - 12px);
+    flex: 0 1 calc(33.33% - 20px); /* На планшетах по 3 в ряд */
+  }
+}
+
+@media (min-width: 1024px) {
+  .media.photos .photo-wrapper {
+    flex: 0 1 calc(20% - 20px); /* На десктопе по 5 в ряд */
+    max-width: 220px;
   }
 }
 
 .photo-wrapper {
-  border-radius: 20px;
+  border-radius: 25px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  transition: transform 0.3s;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: white;
+  padding: 8px; /* Добавил рамку вокруг фото */
+  border: 3px solid rgba(255,255,255,0.8);
 }
 
 .photo-wrapper img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; /* Автоматическая высота */
+  object-fit: contain; /* Вместо cover - показывает всё фото */
   display: block;
+  border-radius: 20px;
+  background: #f0f0f0; /* Фон на случай прозрачных фото */
 }
 
-.photo-wrapper:hover { transform: scale(1.03); }
+.photo-wrapper:hover { 
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(230, 57, 70, 0.4);
+}
+
+/* Подписи к фото (можно добавить при желании) */
+.photo-caption {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #e63946;
+  font-weight: 600;
+}
 
 .media.videos {
-  gap: 15px;
-  margin-top: 20px;
+  gap: 20px;
+  margin-top: 30px;
 }
 
 .media.videos video {
   width: 100%;
-  max-width: 280px;
+  max-width: 320px; /* Увеличил видео */
   height: auto;
-  border-radius: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  border-radius: 25px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  border: 4px solid white;
 }
 
 .heart-btn {
-  font-size: min(100px, 30vw);
+  font-size: min(120px, 35vw); /* Увеличил сердечко */
   color: #e63946;
   cursor: pointer;
   user-select: none;
@@ -157,6 +183,7 @@ button:active {
   transition: transform 0.3s, text-shadow 0.3s;
   z-index: 2;
   animation: heartbeat 1.5s ease infinite;
+  filter: drop-shadow(0 10px 15px rgba(230,57,70,0.3));
 }
 
 @keyframes heartbeat {
@@ -174,14 +201,15 @@ button:active {
 }
 
 .click-text { 
-  font-size: 1.2rem; 
+  font-size: 1.3rem; 
   color: #e63946; 
   margin: 15px 0;
   font-weight: 600;
-  background: rgba(255,255,255,0.5);
-  padding: 8px 20px;
+  background: rgba(255,255,255,0.7);
+  padding: 8px 25px;
   border-radius: 50px;
   backdrop-filter: blur(5px);
+  border: 2px solid white;
 }
 
 /* Окошко с подарком */
@@ -207,7 +235,7 @@ button:active {
 }
 
 .gift-info .package { 
-  font-size: 70px; 
+  font-size: 80px; 
   animation: bounce 1s infinite alternate;
   margin-bottom: 10px;
 }
@@ -216,11 +244,12 @@ button:active {
   color: #e63946;
   text-decoration: none;
   font-weight: 700;
-  padding: 8px 20px;
-  background: rgba(255,255,255,0.8);
+  padding: 8px 25px;
+  background: rgba(255,255,255,0.9);
   border-radius: 50px;
   display: inline-block;
   transition: all 0.3s;
+  border: 2px solid white;
 }
 
 .gift-info a:hover {
@@ -233,19 +262,21 @@ button:active {
 .passport-message {
   background: linear-gradient(135deg, #ffd700, #ffa500);
   color: #333;
-  padding: 15px 20px;
+  padding: 15px 25px;
   border-radius: 50px;
   font-weight: 700;
   font-size: clamp(1.1rem, 5vw, 1.3rem);
   margin: 20px 0 10px;
-  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-  border: 2px solid white;
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+  border: 3px solid white;
   animation: glow 2s infinite alternate;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 @keyframes glow {
-  from { box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); }
-  to { box-shadow: 0 10px 30px rgba(255, 215, 0, 0.8); }
+  from { box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4); }
+  to { box-shadow: 0 10px 40px rgba(255, 215, 0, 0.8); }
 }
 
 @keyframes pop { 
@@ -276,16 +307,16 @@ button:active {
   100%{transform:translateY(-20vh) scale(1);opacity:0;}
 }
 
-/* КРАСИВОЕ РАСПОЛОЖЕНИЕ ТЕКСТА (вместо плавающих титров) */
+/* КРАСИВОЕ РАСПОЛОЖЕНИЕ ТЕКСТА */
 .beautiful-text {
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(15px);
-  padding: 30px 25px;
-  border-radius: 50px 50px 50px 50px;
-  max-width: 90%;
-  width: 800px;
+  padding: 35px 30px;
+  border-radius: 60px 60px 60px 60px;
+  max-width: 95%;
+  width: 900px;
   margin: 20px auto;
-  box-shadow: 0 25px 50px rgba(230, 57, 70, 0.5);
+  box-shadow: 0 30px 60px rgba(230, 57, 70, 0.5);
   border: 3px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
@@ -304,7 +335,7 @@ button:active {
     rgba(255, 255, 255, 0.1) 50%,
     transparent 70%
   );
-  animation: shine 6s infinite;
+  animation: shine 8s infinite;
 }
 
 @keyframes shine {
@@ -316,7 +347,7 @@ button:active {
   font-family: 'Comfortaa', cursive;
   color: #fff;
   font-size: clamp(1.2rem, 5vw, 1.8rem);
-  line-height: 1.8;
+  line-height: 1.9;
   margin: 20px 0;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   position: relative;
@@ -325,7 +356,6 @@ button:active {
   padding: 0;
 }
 
-/* Стили для разных абзацев */
 .beautiful-text p:nth-child(odd) {
   transform: rotate(0.5deg);
 }
@@ -341,9 +371,9 @@ button:active {
 
 .beautiful-text .signature-text {
   font-family: 'Pacifico', cursive;
-  font-size: clamp(1.5rem, 7vw, 2.5rem);
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
   color: #ffd700;
-  margin-top: 30px;
+  margin-top: 35px;
   text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
   animation: softGlow 3s infinite alternate;
 }
@@ -357,14 +387,15 @@ button:active {
 .heart-decoration {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin: 20px 0;
+  gap: 20px;
+  margin: 25px 0;
   flex-wrap: wrap;
 }
 
 .heart-decoration span {
-  font-size: 30px;
+  font-size: 40px;
   animation: floatDecoration 2s infinite alternate;
+  filter: drop-shadow(0 5px 10px rgba(230,57,70,0.3));
 }
 
 @keyframes floatDecoration {
@@ -376,7 +407,7 @@ button:active {
 .heart-decoration span:nth-child(3) { animation-delay: 0.6s; }
 .heart-decoration span:nth-child(4) { animation-delay: 0.9s; }
 
-/* Кнопки в мобильной версии */
+/* Кнопки */
 .credits-button {
   margin: 30px 0 20px;
   width: 100%;
@@ -394,14 +425,14 @@ button:active {
 /* Любовное фото */
 .love-photo {
   width: 100%;
-  max-width: 400px;
+  max-width: 450px; /* Увеличил */
   height: auto;
   max-height: 70vh;
-  border-radius: 40px;
-  border: 5px solid #fff;
-  box-shadow: 0 0 40px rgba(255,255,255,0.6);
+  border-radius: 50px;
+  border: 6px solid #fff;
+  box-shadow: 0 0 50px rgba(255,255,255,0.6);
   object-fit: cover;
-  margin: 15px 0;
+  margin: 20px 0;
   animation: heartbeat 3s infinite, glow 3s infinite alternate;
 }
 
@@ -411,6 +442,7 @@ button:active {
   button { min-width: 160px; padding: 12px 20px; }
   .beautiful-text { padding: 20px 15px; }
   .beautiful-text p { margin: 15px 0; }
+  .photo-wrapper { max-width: 240px; }
 }
 
 /* Горизонтальная ориентация */
@@ -427,13 +459,23 @@ button:active {
   <h1>Так начиналась наша история 💖</h1>
   <p>И это далеко не конец, обещаю тебе дальше будет теплее, интереснее и нежнее…</p>
   
-  <!-- Фотографии сверху -->
+  <!-- Фотографии - ТЕПЕРЬ ПОЛНОСТЬЮ ВИДНЫ -->
   <div class="media photos">
-    <div class="photo-wrapper"><img src="photo1.jpg" alt="Фото 1"></div>
-    <div class="photo-wrapper"><img src="photo2.jpg" alt="Фото 2"></div>
-    <div class="photo-wrapper"><img src="photo3.jpg" alt="Фото 3"></div>
-    <div class="photo-wrapper"><img src="photo4.jpg" alt="Фото 4"></div>
-    <div class="photo-wrapper"><img src="photo5.jpg" alt="Фото 5"></div>
+    <div class="photo-wrapper">
+      <img src="photo1.jpg" alt="Фото 1">
+    </div>
+    <div class="photo-wrapper">
+      <img src="photo2.jpg" alt="Фото 2">
+    </div>
+    <div class="photo-wrapper">
+      <img src="photo3.jpg" alt="Фото 3">
+    </div>
+    <div class="photo-wrapper">
+      <img src="photo4.jpg" alt="Фото 4">
+    </div>
+    <div class="photo-wrapper">
+      <img src="photo5.jpg" alt="Фото 5">
+    </div>
   </div>
 
   <!-- Видео снизу -->
@@ -457,21 +499,21 @@ button:active {
     <span>💓</span>
   </div>
   
-  <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:20px; margin:20px 0;">
+  <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:30px; margin:20px 0;">
     <div style="position:relative;">
       <img src="love_photo.jpg" alt="Love Is" class="love-photo" id="lovePhoto">
     </div>
     <div style="
-        max-width:280px;
-        font-size:1.2rem;
+        max-width:300px;
+        font-size:1.3rem;
         color:#e63946;
         font-weight:bold;
-        background: rgba(255,255,255,0.9);
-        padding:15px 20px;
-        border-radius:30px;
-        box-shadow:0 10px 25px rgba(230,57,70,0.3);
+        background: rgba(255,255,255,0.95);
+        padding:18px 25px;
+        border-radius:40px;
+        box-shadow:0 15px 35px rgba(230,57,70,0.3);
         text-align:center;
-        border:2px solid white;
+        border:3px solid white;
       ">
       🌆 Это мы, кстати, с тобой в Питере))
     </div>
@@ -505,7 +547,7 @@ button:active {
   </div>
 </div>
 
-<!-- Секция 4: Красивый текст (вместо плавающих титров) -->
+<!-- Секция 4: Красивый текст -->
 <div class="section" id="creditsSection">
   <h1 style="color:#fff; text-shadow: 0 0 15px #e63946;">❤️ Самое важное ❤️</h1>
   
@@ -668,13 +710,12 @@ if(lovePhoto) {
   }, 800);
 }
 
-// Предзагрузка изображений (чтобы не было лагов)
+// Предзагрузка
 window.addEventListener('load', () => {
-  // Создаем несколько сердечек сразу для приветствия
   setTimeout(createHearts, 500);
 });
 
-// Адаптация для мобильных устройств - обработка касаний
+// Адаптация для мобильных
 document.addEventListener('touchstart', function() {}, {passive: true});
 
 </script>
